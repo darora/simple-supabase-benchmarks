@@ -18,6 +18,6 @@ done
 
 psql -h localhost -U supabase_admin -d postgres -c "alter role supabase_admin password '${POSTGRES_PASSWORD}';"
 
-echo "Done setting pg password!"
+echo "Done setting pg password to ${POSTGRES_PASSWORD}!"
 
 sleep infinity
