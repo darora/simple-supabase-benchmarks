@@ -16,7 +16,7 @@ while ! pg_isready -h "localhost" -d "postgres" -U "supabase_admin" 2>/dev/null;
   sleep "${RETRY_INTERVAL}"
 done
 
-psql -h localhost -U supabase_admin -d postgres -c "alter role supabase_admin password to '${POSTGRES_PASSWORD}';"
+psql -h localhost -U supabase_admin -d postgres -c "alter role supabase_admin password '${POSTGRES_PASSWORD}';"
 
 echo "Done setting pg password!"
 
