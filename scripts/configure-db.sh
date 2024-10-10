@@ -16,4 +16,4 @@ while ! pg_isready -h "$HOST" -p "$PORT" -d "$DB_NAME" -U "$USER" 2>/dev/null; d
   sleep "${RETRY_INTERVAL}"
 done
 
-pgbench --initialize --init-steps dtGvp --scale 200
+psql -h localhost -U supabase_admin -d postgres -c "alter role supabase_admin password to '${PGPASSWORD}';"
