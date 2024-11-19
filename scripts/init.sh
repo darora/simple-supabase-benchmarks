@@ -16,4 +16,4 @@ while ! pg_isready -h "${HOSTNAME}" -d "postgres" -U "supabase_admin" 2>/dev/nul
   sleep "${RETRY_INTERVAL}"
 done
 
-pgbench --initialize --init-steps dtGvp --scale 200
+pgbench --initialize --init-steps dtgvp --scale "${SCALE:-30}"
