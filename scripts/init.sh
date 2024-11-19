@@ -16,4 +16,11 @@ while ! pg_isready -h "${HOSTNAME}" -d "postgres" -U "supabase_admin" 2>/dev/nul
   sleep "${RETRY_INTERVAL}"
 done
 
-pgbench --initialize --init-steps dtgvp --scale "${SCALE:-30}"
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+RUN_DESCRIPTION=${RUN_DESCRIPTION:-init}
+OUTPUT_DIR=${OUTPUT_DIR:-/mnt/benchmark_output}
+FL_NAME="${OUTPUT_DIR}/${RUN_DESCRIPTION}/${HOSTNAME}_${TIMESTAMP}"
+
+mkdir -p "$(dirname "$FL_NAME")"
+
+pgbench --initialize --init-steps dtgvp --scale "${SCALE:-30}" | tee -a "${FL_NAME}"
